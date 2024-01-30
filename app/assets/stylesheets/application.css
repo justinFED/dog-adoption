@@ -15,8 +15,12 @@
  
  */
 
-
-
+ :root {
+  --primary-color: #E8C872;
+  --secondary-color: #FFF3CF;
+  --accent-color: #C9D7DD;
+  --neutral-color: #637A9F;
+}
 
  body {
     background-color: #C9D7DD;
