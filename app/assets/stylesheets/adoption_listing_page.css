@@ -8,7 +8,7 @@
 .container-sm {
     justify-content: center;
     text-align: center;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
 }
 
 
@@ -38,14 +38,14 @@
 }
 
 .img-fluid{
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .imgrid {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    border-radius: 10px;
+
 }
 
 /* Set a fixed height for grid items */
@@ -55,9 +55,11 @@
 }
 
 .dog-item-container {
-    background-color: var(--secondary-color);
+    align-items: center;
+    background-color: var( --primary-color);
     margin-bottom: 10px;
     border-radius: 10px;
+    border: 5px solid black;
     
 }
 
@@ -69,5 +71,6 @@
 
 .dog-item-container button {
     background-color: var(--neutral-color);
-    width: 410px;
+    width: 400px;
+  
 }
