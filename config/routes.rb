@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-
+  get 'dogs/show/:id', to: 'dogs#show'
+  resources :dogs, only: [:show]
   # Remove the session route and set the root path to the landing page
   root 'pages#index', as: :landing_page
 
