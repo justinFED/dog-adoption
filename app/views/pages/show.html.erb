@@ -73,9 +73,10 @@
           // Create adopt now button
           const adoptButton = document.createElement('button');
           adoptButton.textContent = 'Adopt Now';
-          adoptButton.classList.add('btn');
-          adoptButton.classList.add('btn-primary');
-          adoptButton.classList.add('btn-lg');
+          adoptButton.classList.add('btn', 'btn-primary', 'btn-lg');
+          adoptButton.addEventListener('click', function() {
+            window.location.href = `/dogs/show`; // Adjust URL as needed
+          });
           container.appendChild(adoptButton);
 
           gridItem.appendChild(container);
