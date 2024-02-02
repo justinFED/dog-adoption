@@ -69,10 +69,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
-group :development, :test do
-  gem 'rspec-rails', '~> 5.0'
-  gem 'httparty', '~> 0.19'
-  gem 'dotenv-rails'
-  gem 'webmock'
-end
