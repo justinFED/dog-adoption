@@ -1,0 +1,100 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light ">
+  <div class="nav-container">
+    <a class="navbar-brand" href="<%= @landing_page %>">Pawsome Pals</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="btn btn-landing btn-lg" href="/users/sign_in" role="button">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-landing btn-lg" href="/users/sign_up" role="button">Signup</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Main content area -->
+<div class="container-sm">
+  <!-- Container for dog images -->
+  <h1>ADOPTION LISTING</h1>
+  <h2>Lets rehome them now!</h2>
+  <div id="grid" class="row"></div>
+</div>
+
+<!-- JavaScript code for fetching dog images -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const url = 'https://api.thedogapi.com/v1/images/search?limit=9';
+    const apiKey = 'live_iVeNL5naj6yQlZeUr4zxav6cKp6T0UenMX1q2GEMYnJS2m6fntJzB4Cib6SE2kaj';
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.setRequestHeader('x-api-key', apiKey);
+
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        const responseData = JSON.parse(xhr.responseText);
+        const dogImagesContainer = document.getElementById('grid');
+
+        responseData.forEach(function(imageData) {
+          const imageUrl = imageData.url;
+          const name = imageData.name;
+          const breed = imageData.breed;
+
+          // Create grid item container
+          const gridItem = document.createElement('div');
+          gridItem.classList.add('col-lg-4'); // Bootstrap grid column width for large screens
+
+          // Create container for each item
+          const container = document.createElement('div');
+          container.classList.add('dog-item-container');
+
+          // Create image element
+          const imageElement = document.createElement('img');
+          imageElement.src = imageUrl;
+          imageElement.classList.add('img-fluid');
+          container.appendChild(imageElement);
+
+          // Create name element
+          const nameElement = document.createElement('p');
+          nameElement.textContent = 'Name: ' + name;
+          container.appendChild(nameElement);
+
+          // Create breed element
+          const breedElement = document.createElement('p');
+          breedElement.textContent = 'Breed: ' + breed;
+          container.appendChild(breedElement);
+
+          // Create adopt now button
+          const adoptButton = document.createElement('button');
+          adoptButton.textContent = 'Adopt Now';
+          adoptButton.classList.add('btn', 'btn-primary', 'btn-lg');
+          adoptButton.addEventListener('click', function() {
+            window.location.href = `/dogs/show`; // Adjust URL as needed
+          });
+          container.appendChild(adoptButton);
+
+          gridItem.appendChild(container);
+          dogImagesContainer.appendChild(gridItem);
+        });
+      } else {
+        console.error('Request failed. Status: ' + xhr.status);
+      }
+    };
+
+    xhr.onerror = function() {
+      console.error('Request failed');
+    };
+
+    // Send the request to fetch dog images
+    xhr.send();
+  });
+</script>
+
+
+</body>
