@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema[7.1].define(version: 2024_02_03_152740) do
   create_table "users", force: :cascade do |t|
+    t.string "first_name"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -19,7 +20,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_03_152740) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name"
     t.string "last_name"
     t.integer "role", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
