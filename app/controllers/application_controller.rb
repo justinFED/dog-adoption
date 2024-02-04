@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
       if resource.is_a?(User) && resource.admin?
         admin_dashboard_index_path
       else
-        # Redirect to a different path for non-admin users
+        user_dashboard_index_path
         super
       end
     end
