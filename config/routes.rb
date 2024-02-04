@@ -18,4 +18,9 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
     resources :users
   end
+
+  namespace :user do
+    resources :dashboard, only: [:index]
+  end
+  
 end
