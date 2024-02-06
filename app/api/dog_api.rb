@@ -22,4 +22,9 @@ class DogApi
     self.class.get("/images/#{image_id}", @options)
   end
 
+  def fetch_random_images
+    self.class.get("/images/search?limit=9", @options)
+  end
+  
+
 end
