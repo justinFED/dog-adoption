@@ -1,10 +1,14 @@
 class ApplicationController < ActionController::Base
+<<<<<<< HEAD
     before_action :configure_permitted_parameters, if: :devise_controller?
+=======
+>>>>>>> main
   
     protected
   
     def after_sign_in_path_for(resource)
       if resource.admin?
+<<<<<<< HEAD
         admin_dashboard_index_path
       else
         user_dashboard_index_path
@@ -20,3 +24,11 @@ class ApplicationController < ActionController::Base
     end
   end
   
+=======
+          admin_dashboard_index_path
+      else
+          user_dashboard_index_path
+       end
+  end
+  end
+>>>>>>> main
