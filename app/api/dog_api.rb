@@ -28,7 +28,10 @@ class DogApi
     end
   end
 
-<<<<<<< HEAD
+  def fetch_random_images
+    self.class.get("/images/search?limit=9", @options)
+  end
+
   private
 
   def handle_request_errors
@@ -44,11 +47,3 @@ class DogApi
     end
   end
 end
-=======
-  def fetch_random_images
-    self.class.get("/images/search?limit=9", @options)
-  end
-  
-
-end
->>>>>>> mico_branch
