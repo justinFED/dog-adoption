@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-
-
+ 
+  get 'dogs/index' => 'dogs#index'
   # API endpoints
   get 'dogs/breeds', to: 'dogs#breeds', as: 'breeds'
   get 'dogs/image/:image_id', to: 'dogs#image_details', as: 'image_details'

@@ -74,3 +74,12 @@
     width: 400px;
   
 }
+
+.dog-listing-container {
+    background-color: #FFF3CF;
+    max-width: 1080px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
