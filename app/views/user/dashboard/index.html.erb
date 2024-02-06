@@ -1,10 +1,74 @@
-<h1>User Dashboard</h1>
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="nav-container">
+    <a class="navbar-brand" href="#">Pawsome Pals</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="<%= user_dashboard_index_path %>" class="btn btn-landing btn-lg">Home</a>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Listings", listings_user_dashboard_index_path, class: "btn btn-landing btn-lg" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Settings", edit_user_registration_path, class: "btn btn-landing btn-lg" %>
+        </li>
+      </ul>
+      <%= link_to 'Sign Out', destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn btn-landing btn-lg' %>
+    </div>
+  </div>
+</nav>
 
-<p>Welcome, <%= current_user.email %>!</p>
+<div class="dashboard-container">
+  <h2 class="user-header">Welcome to Pawsome Pals Dog Adoption Center <%= "#{current_user.first_name} #{current_user.last_name}" %>!</h2>
 
+  <div class="row">
+    <div class="col-md-6">
+      <div class="why-adopt container-sm">
+        <div class="why-adopt-inner">
+          <h3>Why Should You Adopt?</h3>
+          <p>
+            There are several reasons why adopting dogs from shelters or rescue organizations is a commendable choice:
+            <ul>
+              <li>Save a Life</li>
+              <li>Combat Overpopulation</li>
+              <li>Support Rescue Organizations</li>
+              <li>Prevent Puppy Mills</li>
+              <li>Find Your Perfect Match</li>
+              <li>Health Benefits</li>
+              <li>Promote Responsible Pet Ownership</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+      <!-- New container for the new section -->
+      <div class="new-container container-sm">
+        <h3>New Section Title</h3>
+        <p>New section content goes here.</p>
+      </div>
+    </div>
 
-<%= link_to 'Sign Out', destroy_user_session_path, data: { turbo_method: :delete } %>
-
-
-
-
+    <div class="col-md-6">
+      <div class="random-images container-sm">
+        <h3>They could be a part of your family. Rehome them now!</h3>
+        <h6>Following pals below are not for adoption**</h6>
+        <div class="row">
+          <% dog_api = DogApi.new %>
+          <% images_response = dog_api.fetch_random_images %>
+          <% if images_response.code == 200 %>
+            <% images = JSON.parse(images_response.body) %>
+            <% images.take(9).each do |image| %>
+              <div class="col-md-4 mb-4">
+                <img src="<%= image['url'] %>" alt="Dog Image" class="img-fluid" style="max-width: 250px; max-height: 200px;">
+              </div>
+            <% end %>
+          <% else %>
+            <p>Failed to fetch images from Dog API</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
