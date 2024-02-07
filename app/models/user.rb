@@ -5,10 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   after_create :assign_default_role
-<<<<<<< HEAD
-  
-=======
->>>>>>> main
 
   private
 
