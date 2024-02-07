@@ -16,7 +16,9 @@
 							<th>Age</th>
 							<th>Breed</th>
 							<th>Description</th>
+							<th>Other details</th>
 							<th>Active?</th>
+							<th>Image</th>
 							<th>Actions</th>
 					</tr>
         </thead>
@@ -27,7 +29,14 @@
 							<td><%= dog.age %> years</td>
 							<td><%= dog.breed %></td>
 							<td><%= dog.description %></td>
+							<td><%= dog.oth_details %></td>
 							<td><%= check_box_tag '', '', dog.isActive?, disabled: true, class: 'form-check-input' %></td>
+							<td>
+								<% if dog.picture.attached? %>
+									<%= image_tag dog.picture, class: "dog-picture" %>
+								<% else %>
+									<p>No picture available.</p>
+								<% end %>
 							<td>
 								<%= link_to 'Edit', edit_dog_path(dog), class: 'btn btn-primary btn-sm' %>
 								<%= link_to 'Delete', dog_path(dog), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
