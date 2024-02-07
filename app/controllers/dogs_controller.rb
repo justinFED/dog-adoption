@@ -1,75 +1,81 @@
 class DogsController < ApplicationController
-  before_action :initialize_api, only: [:breeds, :image_details, :new] 
-
+  before_action :initialize_api, only: [:new, :edit, :create, :update]
+  before_action :set_dog, only: [:show, :edit, :update, :breeds]
+  before_action :set_breeds, only: [:breeds, :new, :edit, :breeds]
 
   def index
     @dogs = Dog.all
   end
 
-  def show
-    
-  end
+  def show; end
 
   def new
     @dog = Dog.new
-    @breeds = breeds
   end
+
+  def edit; end
 
   def create
     @dog = Dog.new(dog_params)
     if @dog.save
-      flash[:success] = "Object successfully created"
-      redirect_to @dog
+      redirect_to dogs_path, notice: "Dog successfully created"
     else
-      flash[:error] = "Something went wrong"
-      render 'new'
+      set_breeds # Reload breeds for rendering the form again
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @dog.update(dog_params)
+      redirect_to dogs_path, notice: 'Dog was successfully updated.'
+    else
+      set_breeds # Reload breeds for rendering the form again
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def temperament
-    breed_name = params[:breed_name]
-    breed_data = fetch_breed_data(params[:id]) # Assuming fetch_breed_data method exists
-    temperament = breed_data["temperament"]
-    render json: { temperament: temperament }
+    breed_data = fetch_breed_data(params[:id])
+    render json: { temperament: breed_data["temperament"] }
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { error: e.message }, status: :not_found
   end
 
   def breeds
-    handle_api_error do
-      @response = @api.list_breeds
-      # @breed_data = fetch_breed_data(params[:id])
-      @breeds = JSON.parse(@response.body) if @response.code.between?(200, 299)
-    end
-  end
-  
-  def image_details
-    handle_api_error do
-      @dog_image_details = @api.fetch_image_details(params[:image_id])
-      render json: @dog_image_details
-    end
+    @breeds ||= handle_api_error { JSON.parse(@api.list_breeds.body) }
   end
 
   private
-  
+
+  def set_dog
+    @dog = Dog.find(params[:id])
+  end
+
   def dog_params
     params.require(:dog).permit(:dog_name, :breed, :description, :age, :gender, :oth_details, :isActive, :picture)
   end
 
   def fetch_breed_data(breed_id)
-    breed = Breed.find(breed_id)
-    breed.attributes
+    Breed.find(breed_id).attributes
   end
 
   def initialize_api
     @api = DogApi.new
   end
 
-  def handle_api_error
-    begin
-      yield
-    rescue StandardError => e
-      Rails.logger.error "API Error in DogsController: #{e.message}"
-      render json: { error: "Error Message: #{e.message}" }, status: :unprocessable_entity
-    end
+  def set_breeds
+    breeds
+  rescue => e
+    flash[:error] = "Failed to load breeds: #{e.message}"
+    @breeds = []
   end
 
+  
+
+  def handle_api_error
+    yield
+  rescue StandardError => e
+    Rails.logger.error "API Error: #{e.message}"
+    nil # Return nil or a default value that calling methods can handle
+  end
 end
