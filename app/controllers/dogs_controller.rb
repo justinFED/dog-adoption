@@ -27,18 +27,16 @@ class DogsController < ApplicationController
   end
 
   def temperament
-    breed = Breed.find_by(name: params[:breed_name])
-    if breed
-      render json: { temperament: breed.temperament }
-    else
-      render json: { error: "Breed not found" }, status: :not_found
-    end
+    breed_name = params[:breed_name]
+    breed_data = fetch_breed_data(params[:id]) # Assuming fetch_breed_data method exists
+    temperament = breed_data["temperament"]
+    render json: { temperament: temperament }
   end
 
   def breeds
     handle_api_error do
       @response = @api.list_breeds
-      # Ensure to use @response here since that's the variable you've assigned
+      # @breed_data = fetch_breed_data(params[:id])
       @breeds = JSON.parse(@response.body) if @response.code.between?(200, 299)
     end
   end
@@ -54,6 +52,11 @@ class DogsController < ApplicationController
   
   def dog_params
     params.require(:dog).permit(:dog_name, :breed, :description, :age, :gender, :oth_details, :isActive, :picture)
+  end
+
+  def fetch_breed_data(breed_id)
+    breed = Breed.find(breed_id)
+    breed.attributes
   end
 
   def initialize_api

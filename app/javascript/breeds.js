@@ -4,8 +4,13 @@ document.addEventListener("turbolinks:load", function() {
   console.log(breedSelect)
   breedSelect.addEventListener('change', function() {
     const breedName = this.value;
-    fetch(`/breeds/${encodeURIComponent(breedName)}/temperament`)
-      .then(response => response.json())
+    fetch(/breeds/${encodeURIComponent(breedName)}/temperament)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         descriptionField.value = data.temperament || 'Temperament not found';
       })

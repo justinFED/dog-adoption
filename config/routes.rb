@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   get 'dogs/image/:image_id', to: 'dogs#image_details', as: 'image_details'
   get 'breeds/:breed_name/temperament', to: 'breeds#temperament', as: :breed_temperament
 
+  resources :breeds do
+    get 'temperament', on: :member
+  end
+  
   # Remove the session route and set the root path to the landing page
   root 'pages#index', as: :landing_page
 
