@@ -15,6 +15,17 @@ class DogsController < ApplicationController
     @breeds = breeds
   end
 
+  def create
+    @dog = Dog.new(dog_params)
+    if @dog.save
+      flash[:success] = "Object successfully created"
+      redirect_to @dog
+    else
+      flash[:error] = "Something went wrong"
+      render 'new'
+    end
+  end
+
   def temperament
     breed = Breed.find_by(name: params[:breed_name])
     if breed
@@ -23,7 +34,6 @@ class DogsController < ApplicationController
       render json: { error: "Breed not found" }, status: :not_found
     end
   end
-  
 
   def breeds
     handle_api_error do
@@ -43,7 +53,7 @@ class DogsController < ApplicationController
   private
   
   def dog_params
-    params.require(:dog).permit(:dog_name, :breed, :description, :age, :gender, :other_details, :is_active, :picture)
+    params.require(:dog).permit(:dog_name, :breed, :description, :age, :gender, :oth_details, :isActive, :picture)
   end
 
   def initialize_api
