@@ -1,7 +1,6 @@
 <!-- Navbar from Browse Page-->
 <nav class="navbar navbar-expand-lg navbar-light ">
 <% if user_signed_in? %>
-<% current_user.role %> 
   <% if current_user.role == 'admin' %> 
       <!-- Navbar Admin Page -->
       <div class="nav-container">
@@ -68,3 +67,4 @@
     </div>
   </div>
 <% end %>
+</nav>
