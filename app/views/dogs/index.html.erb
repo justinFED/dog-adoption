@@ -1,3 +1,6 @@
+<!-- Navbar -->
+<%= render "shared/navbar" %>
+
 <main class="dog-listing-container">
 	<div class="row">
 		<div class="col-12">
@@ -18,18 +21,20 @@
 					</tr>
         </thead>
         <tbody>
-					<tr>
-						<td>Charlie</td>
-						<td>2 years</td>
-						<td>Labrador</td>
-						<td>Very energetic and loves to play fetch.</td>
-						<td><input type="checkbox" class="form-check-input" checked></td>
-						<td>
-							<button class="btn btn-primary btn-sm">Edit</button>
-							<button class="btn btn-danger btn-sm">Delete</button>
-						</td>
-					</tr>
-        </tbody>
+					<% @dogs.each do |dog| %>
+						<tr>
+							<td><%= dog.dog_name %></td>
+							<td><%= dog.age %> years</td>
+							<td><%= dog.breed %></td>
+							<td><%= dog.description %></td>
+							<td><%= check_box_tag '', '', dog.isActive?, disabled: true, class: 'form-check-input' %></td>
+							<td>
+								<%= link_to 'Edit', edit_dog_path(dog), class: 'btn btn-primary btn-sm' %>
+								<%= link_to 'Delete', dog_path(dog), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
     </table>
 	</div>
 </main>
