@@ -8,10 +8,12 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="btn btn-landing btn-lg" href="/users/sign_in" role="button">Login</a>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-landing btn-lg", role: "button" %>
+
         </li>
         <li class="nav-item">
-          <a class="btn btn-landing btn-lg" href="/users/sign_up" role="button">Signup</a>
+        <%= link_to "Signup", new_user_registration_path, class: "btn btn-landing btn-lg", role: "button" %>
+
         </li>
       </ul>
     </div>

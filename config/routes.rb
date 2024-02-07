@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
 
   # Custom route for showing individual dogs
   get 'dogs/show/:id', to: 'dogs#show', as: :show_dog

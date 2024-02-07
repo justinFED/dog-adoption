@@ -4,6 +4,7 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'needs-validation', novalidate: true }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
+    <!-- Add your custom fields here -->
     <div class="form-group">
       <%= f.label :first_name %><br />
       <%= f.text_field :first_name, autofocus: true, class: 'form-control', required: true %>
@@ -12,7 +13,7 @@
       </div>
     </div>
 
-    <!-- Add the new fields -->
+    <!-- Add other fields as needed -->
     <div class="form-group">
       <%= f.label :last_name %><br />
       <%= f.text_field :last_name, class: 'form-control', required: true %>
@@ -44,7 +45,7 @@
         Please enter your contact details.
       </div>
     </div>
-    <!-- End of new fields -->
+    <!-- End of custom fields -->
 
     <div class="form-group">
       <%= f.label :email %><br />
