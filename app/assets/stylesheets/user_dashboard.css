@@ -1,0 +1,39 @@
+:root {
+    --primary-color: #E8C872;
+    --secondary-color: #FFF3CF;
+    --accent-color: #C9D7DD;
+    --neutral-color: #637A9F;
+}
+
+
+
+
+.why-adopt{
+    text-align: left;
+    background-color: var(--neutral-color);
+    border-radius: 20px;
+    width: 900px;
+    height: 320px;
+}
+
+
+
+
+.why-adopt-inner p{
+    font-weight: 500px;
+    font-size: 1.2rem;
+}
+
+.why-adopt-inner h3,
+.random-images h3 {
+    font-weight: 800px;
+
+}
+
+.random-images{
+    text-align: left;
+    background-color: var(--neutral-color);
+    border-radius: 20px;
+    width: 880px;
+}
+
