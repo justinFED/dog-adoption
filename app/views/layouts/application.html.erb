@@ -14,6 +14,8 @@
     <%= stylesheet_link_tag "adoption_listing_page", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "user_dashboard", "data-turbo-track": "reload" %>
 
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'breeds', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -23,5 +25,6 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    
   </body>
 </html>

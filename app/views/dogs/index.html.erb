@@ -1,0 +1,41 @@
+<!-- Navbar -->
+<%= render "shared/navbar" %>
+
+<main class="dog-listing-container">
+	<div class="row">
+		<div class="col-12">
+			<h2>Find Your Perfect Companion</h2>
+			<h3>Search by Breed</h3>
+			<input type="search" id="breedSearch" name="breedSearch" class="form-control mb-3" placeholder="Enter breed here" aria-label="Search dogs by breed">
+			<p>Explore our database of dogs ready for adoption. Use the search box above to filter by breed.</p>
+			<%= link_to 'Add New Dog', new_dog_path, class: 'btn btn-success mb-3' %>
+			<table class="table">
+        <thead>
+					<tr>
+							<th>Name</th>
+							<th>Age</th>
+							<th>Breed</th>
+							<th>Description</th>
+							<th>Active?</th>
+							<th>Actions</th>
+					</tr>
+        </thead>
+        <tbody>
+					<% @dogs.each do |dog| %>
+						<tr>
+							<td><%= dog.dog_name %></td>
+							<td><%= dog.age %> years</td>
+							<td><%= dog.breed %></td>
+							<td><%= dog.description %></td>
+							<td><%= check_box_tag '', '', dog.isActive?, disabled: true, class: 'form-check-input' %></td>
+							<td>
+								<%= link_to 'Edit', edit_dog_path(dog), class: 'btn btn-primary btn-sm' %>
+								<%= link_to 'Delete', dog_path(dog), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+    </table>
+	</div>
+</main>
+

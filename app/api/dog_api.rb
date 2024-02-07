@@ -5,7 +5,13 @@ class DogApi
   base_uri 'https://api.thedogapi.com/v1'
 
   def initialize
-    @options = { headers: { "x-api-key" => ENV['DOG_API_KEY'] } }
+    @options = { 
+      headers: { 
+        "x-api-key" => ENV['DOG_API_KEY'],
+        "Content-Type" => "application/json",
+        "Accept" => "application/json" 
+      } 
+    }
   end
 
   # Fetch a list of breeds

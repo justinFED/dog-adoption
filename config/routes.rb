@@ -17,11 +17,19 @@ Rails.application.routes.draw do
 
   # Custom route for adoption listing viewing
   get 'pages/show', to: 'pages#show', as: :adoption_listing_viewing
+  resources :dogs, only: [:index, :new, :create, :edit, :update, :destroy]
 
   # API endpoints
   get 'dogs/breeds', to: 'dogs#breeds', as: 'breeds'
   get 'dogs/image/:image_id', to: 'dogs#image_details', as: 'image_details'
-  resources :dogs, only: [:show]
+  get 'breeds/:breed_name/temperament', to: 'breeds#temperament', as: :breed_temperament
+
+  resources :breeds do
+    get 'temperament', on: :member
+  end
+  
+  # Remove the session route and set the root path to the landing page
+
 
   # Admin dashboard routes
   namespace :admin do
