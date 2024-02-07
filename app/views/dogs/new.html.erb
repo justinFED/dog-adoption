@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      Add New Dog
+    </div>
+    <div class="card-body">
+      <%= form_with(model: @dog, local: true, url: dogs_path, html: {multipart: true, class: "needs-validation", novalidate: true}) do |form| %>
+        <% if @dog.errors.any? %>
+          <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading"><%= pluralize(@dog.errors.count, "error") %> prohibited this dog from being saved:</h4>
+            <ul>
+              <% @dog.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="mb-3">
+          <%= form.label :dog_name, class: 'form-label' %>
+          <%= form.text_field :dog_name, id: :dog_dog_name, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+      <%= form.label :breed, class: 'form-label' %>
+      <%= form.select :breed, options_for_select(@breeds.map { |b| ["#{b['name']}", b['name']] }), {}, {class: "form-select"} %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :description, class: 'form-label' %>
+      <%= form.text_area :description, id: :dog_description, class: 'form-control' %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :age, class: 'form-label' %>
+      <%= form.number_field :age, id: :dog_age, class: 'form-control' %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :gender, class: 'form-label' %>
+      <%= form.select :gender, options_for_select(['Male', 'Female']), {}, {class: "form-select"} %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :other_details, class: 'form-label' %>
+      <%= form.text_area :other_details, id: :dog_other_details, class: 'form-control' %>
+    </div>
+
+    <div class="mb-3 form-check">
+      <%= form.label :is_active, 'Active', class: 'form-check-label' %>
+      <%= form.check_box :is_active, class: 'form-check-input' %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :picture, "Upload Picture of the Dog", class: 'form-label' %>
+      <%= form.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'form-control' %>
+    </div>
+
+        <div class="actions">
+          <%= form.submit class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
- 
-  get 'dogs/index' => 'dogs#index'
+
+  resources :dogs, only: [:index, :new, :create, :edit, :update, :destroy]
+
   # API endpoints
   get 'dogs/breeds', to: 'dogs#breeds', as: 'breeds'
   get 'dogs/image/:image_id', to: 'dogs#image_details', as: 'image_details'
-  resources :dogs, only: [:show]
+  get 'breeds/:breed_name/temperament', to: 'breeds#temperament', as: :breed_temperament
 
   # Remove the session route and set the root path to the landing page
   root 'pages#index', as: :landing_page
@@ -19,8 +20,12 @@ Rails.application.routes.draw do
     resources :users
   end
 
+  # User routes
   namespace :user do
-    resources :dashboard, only: [:index]
+    resources :dashboard, only: [:index] do
+      # Define listings action under the dashboard namespace
+      get 'listings', on: :collection
+    end
   end
   
 end
