@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
 
-<<<<<<< HEAD
   resources :dogs, only: [:index, :new, :create, :edit, :update, :destroy]
 
   # API endpoints
@@ -14,7 +13,6 @@ Rails.application.routes.draw do
   end
   
   # Remove the session route and set the root path to the landing page
-=======
   # Custom route for showing individual dogs
   get 'dogs/show/:id', to: 'dogs#show', as: :show_dog
 
@@ -31,7 +29,6 @@ Rails.application.routes.draw do
   
 
   # Root path set to landing page
->>>>>>> admin
   root 'pages#index', as: :landing_page
 
   # Custom route for adoption listing viewing
@@ -42,16 +39,4 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
     resources :users
   end
-<<<<<<< HEAD
-
-  # User routes
-  namespace :user do
-    resources :dashboard, only: [:index] do
-      # Define listings action under the dashboard namespace
-      get 'listings', on: :collection
-    end
-  end
-  
-=======
->>>>>>> admin
 end

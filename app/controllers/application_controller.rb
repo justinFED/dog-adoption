@@ -10,12 +10,6 @@ class ApplicationController < ActionController::Base
       if resource.admin?
         admin_dashboard_index_path
       else
-<<<<<<< HEAD
-          user_dashboard_index_path
-       end
-    end
-end
-=======
         user_dashboard_index_path
       end
     end
@@ -27,4 +21,3 @@ end
  
   end
   
->>>>>>> admin
