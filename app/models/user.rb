@@ -1,12 +1,14 @@
 class User < ApplicationRecord
   enum role: { user: 0, admin: 1 }
+  
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
   after_create :assign_default_role
   
-
+  has_many :adoption_requests, dependent: :destroy
+  
   private
 
   def assign_default_role

@@ -1,8 +1,25 @@
-<<<<<<< HEAD
-Hello
-=======
-<!-- app/views/user/listings/index.html.erb -->
-<h1>Listings</h1>
-<!-- Your HTML content for the listings page goes here -->
+<!-- Navbar -->
+<%= render "shared/navbar" %>
 
->>>>>>> admin
+<main class="container-sm">
+  <h1>ADOPTION LISTING</h1>
+  <h2>Lets rehome them now!</h2>
+  <div class="row" id="grid">
+    <% @adoptions.each do |adoption| %>
+      <div class="col-lg-4">
+        <div class="dog-item-container">
+          <% if adoption.picture.attached? %>
+            <%= image_tag adoption.picture, class: "dog-picture img-fluid" %>
+          <% else %>
+            <p>No picture available.</p>
+          <% end %>
+          <div class="dog-details">
+            <h3><%= adoption.dog_name %></h3>
+            <p><strong>Breed:</strong> <%= adoption.breed %></p>
+          </div>
+          <%= link_to 'View Profile', dog_path(adoption), class: 'view-profie-button btn btn-primary btn-lg' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</main>

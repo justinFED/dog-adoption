@@ -5,10 +5,12 @@ Rails.application.routes.draw do
   # Resources for managing dogs
   resources :dogs
 
+  # Resources for managing adoption requests
+  resources :adoption_requests, only: [:index, :new, :create]
   # Custom routes for dog-related API endpoints
   get 'dogs/breeds', to: 'dogs#breeds', as: 'breeds'
   get 'dogs/image/:image_id', to: 'dogs#image_details', as: 'image_details'
-
+  
   # Route for viewing temperament of a specific breed
   get 'breeds/:breed_name/temperament', to: 'dogs#temperament', as: :breed_temperament
 
@@ -27,7 +29,6 @@ Rails.application.routes.draw do
   # User dashboard routes
   namespace :user do
     resources :dashboard, only: [:index] do
-      # Define listings action under the dashboard namespace
       get 'listings', on: :collection
     end
   end

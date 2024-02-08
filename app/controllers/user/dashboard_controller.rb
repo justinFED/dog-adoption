@@ -5,7 +5,11 @@ class User::DashboardController < ApplicationController
     @user = current_user
   end
 
+  
+
   def listings
-    # Your logic for the listings page goes here
+    # Fetch the necessary data for the view
+    @adoptions = Dog.where(isActive: true)
+    @listing = nil
   end
 end

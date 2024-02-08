@@ -1,26 +1,40 @@
-<div class="dog_container mt-5">
-  <h1 class="mb-4 text-center">Adoption Information</h1>
-  <div class="row">
-    <div class="col-md-6 mb-4">
-      <div class="card shadow-sm">
-        <img src="https://cdn2.thedogapi.com/images/-HgpNnGXl.jpg" alt="Daisy Jones" class="card-img-top">
-        <div class="card-body">
-          <h2 class="card-title">Daisy Jones</h2>
-          <p class="card-text"><strong>Breed:</strong> Husky</p>
-          <p class="card-text"><strong>Age:</strong> 5 years</p>
-          <p class="card-text"><strong>Gender:</strong> Female</p>
-          
-        </div>
+<%= render "shared/navbar" %>
+
+<h1 class="mb-4 text-center">Adoption Information</h1>
+<div class="adoption-profile">
+<div class="row">
+  <div class="col-md-6 mb-4">
+    <div class="adoption-image-container card shadow-sm">
+      <% if @dog.picture.attached? %>
+        <%= image_tag @dog.picture, class: "card-img-top" %>
+      <% else %>
+        <p>No picture available.</p>
+      <% end %>
+      <div class="card-body">
+        <!-- Add more details here if needed -->
       </div>
-    </div>
-    <div class="col-md-6 mb-4">
-      <div class="card shadow-sm p3 mt-2">
-        <div class="card-body">
-          <h3 class="card-title">Description</h3>
-          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus commodi deserunt eius mollitia minima ullam labore! Iure explicabo, est magnam repellat tempore amet hic repudiandae, reiciendis, facere vel iusto molestias.</p>
-        </div>
-      </div>
-      <%= link_to "Login", new_user_session_path, class: "btn btn-primary mt-2", role: "button" %>
     </div>
   </div>
+  <div class="col-md-6 mb-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h1 class="card-title"><%= @dog.dog_name %></h1>
+        <h4 class="card-title">Description</h4>        
+        <p class="card-text"><strong>Breed:</strong> <%= @dog.breed %></p>
+        <p class="card-text"><strong>Age:</strong> <%= @dog.age %> years</p>
+        <p class="card-text"><strong>Gender:</strong> <%= @dog.gender %></p>
+        <p class="card-text"><strong>Temperament: </strong> <%= @dog.temperament %></p>
+        <p class="card-text"><strong>Additional information: </strong><%= @dog.oth_details %></p>
+        <% if user_signed_in? %>
+            <%= link_to "Create adoption request", new_adoption_request_path(dog_id: @dog.id), class: "btn btn-success mt-2", role: "button" %>
+          <% else %>
+            <%= link_to "Sign up now to adopt!", new_user_registration_path, class: "btn btn-success mt-2", role: "button" %>
+          <% end %>
+         <%= link_to "Back to Listings", listings_user_dashboard_index_path, class: "btn btn-primary mt-2", role: "button" %>
+      </div>
+    </div>
+    
+  </div>
+  </div>
 </div>
+

@@ -1,0 +1,34 @@
+<%= render "shared/navbar" %>
+
+
+<h1>Adoption Requests</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Contact Number</th>
+      <th>Age</th>
+      <th>Occupation</th>
+      <th>Reason</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @adoption_requests.each do |request| %>
+      <tr>
+        <td><%= request.user.first_name + ' ' + request.user.last_name %></td> <!-- Concatenating first name and last name -->
+        <td><%= request.user.address %></td>
+        <td><%= request.user.contact_details %></td>
+        <td><%= request.user.date_of_birth %></td>
+        <td><%= request.occupation %></td>
+        <td><%= request.adoption_essay %></td>
+        <td>
+          <%= button_to "Approve", approve_adoption_request_path(request), method: :post, class: "btn btn-success" %>
+          <%= button_to "Decline", decline_adoption_request_path(request), method: :post, class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
