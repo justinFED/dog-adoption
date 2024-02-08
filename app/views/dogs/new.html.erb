@@ -7,7 +7,7 @@
       Add New Dog
     </div>
     <div class="card-body">
-      <%= form_with(model: @dog, local: true, url: dogs_path, html: {multipart: true, class: "needs-validation", novalidate: true}) do |form| %>
+    <%= form_with(model: @dog, local: true, url: dogs_path, html: {multipart: true, class: "needs-validation", novalidate: true}) do |form| %>
         <% if @dog.errors.any? %>
           <div class="alert alert-danger" role="alert">
             <h4 class="alert-heading"><%= pluralize(@dog.errors.count, "error") %> prohibited this dog from being saved:</h4>
@@ -25,13 +25,13 @@
         </div>
 
         <div class="mb-3">
-      <%= form.label :breed, class: 'form-label' %>
-      <%= form.select :breed, options_for_select(@breeds.map { |b| ["#{b['name']}", b['name']] }), {}, {class: "form-select"} %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :description, class: 'form-label' %>
-      <%= form.text_area :description, id: :dog_description, class: 'form-control' %>
+        <%= form.label :breed, class: 'form-label' %>
+        <%= form.select :breed, options_for_select(@breeds.map { |b| ["#{b['name']}", b['name']] }), {}, {class: "form-select", id: "dog_breed_select"} %>
+        
+      </div>
+      <h3>Description</h3>
+      <div class="temperament-box">
+      <div id="dog-temperament"></div>
     </div>
 
     <div class="mb-3">
@@ -63,7 +63,35 @@
           <%= form.submit class: 'btn btn-primary' %>
         </div>
       <% end %>
+
+
+
     </div>
   </div>
 </div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const breedSelect = document.getElementById('dog_breed_select');
+    const temperamentDiv = document.getElementById('dog-temperament');
+
+    breedSelect.addEventListener('change', function() {
+      const selectedBreed = encodeURIComponent(breedSelect.value);
+      
+      fetch('/breeds/' + selectedBreed + '/temperament')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Breed not found');
+          }
+          return response.json();
+        })
+        .then(data => {
+          temperamentDiv.innerText = data.temperament;
+        })
+        .catch(error => {
+          temperamentDiv.innerText = 'Temperament not found for the selected breed.';
+          console.error('Error fetching dog temperament:', error);
+        });
+    });
+  });
+</script>
