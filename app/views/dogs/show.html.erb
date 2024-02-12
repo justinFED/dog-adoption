@@ -23,7 +23,8 @@
         <p class="card-text"><strong>Breed:</strong> <%= @dog.breed %></p>
         <p class="card-text"><strong>Age:</strong> <%= @dog.age %> years</p>
         <p class="card-text"><strong>Gender:</strong> <%= @dog.gender %></p>
-        <p class="card-text"><strong>Temperament: </strong> <%= @dog.temperament %></p>
+        <p class="card-text"><strong>Temperament: </strong> <%= @dog.description.present? ? @dog.description : "Not specified" %></p>
+
         <p class="card-text"><strong>Additional information: </strong><%= @dog.oth_details %></p>
         <% if user_signed_in? %>
             <%= link_to "Create adoption request", new_adoption_request_path(dog_id: @dog.id), class: "btn btn-success mt-2", role: "button" %>

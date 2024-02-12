@@ -20,6 +20,13 @@ class DogsController < ApplicationController
 
   def create
     @dog = Dog.new(dog_params)
+    response = fetch_breed_details(@dog.breed)
+    if response.present? && response.is_a?(Array) && response.any?
+      breed = response.first
+      @dog.temperament = breed['temperament']
+      @dog.description = breed['temperament']
+      Rails.logger.info "Temperament fetched from API: #{@dog.temperament}"
+    end
     if @dog.save
       redirect_to dogs_path, notice: "Dog successfully created"
     else
@@ -30,12 +37,20 @@ class DogsController < ApplicationController
 
   def update
     if @dog.update(dog_params)
+      response = fetch_breed_details(@dog.breed)
+      if response.present? && response.is_a?(Array) && response.any?
+        breed = response.first
+        @dog.temperament = breed['temperament']
+        Rails.logger.info "Temperament fetched from API: #{@dog.temperament}"
+      end
+      @dog.save
       redirect_to dogs_path, notice: 'Dog was successfully updated.'
     else
       set_breeds
       render :edit, status: :unprocessable_entity
     end
   end
+
 
   def temperament
     breed_name = params[:breed_name]
