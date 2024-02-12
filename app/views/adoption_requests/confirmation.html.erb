@@ -1,0 +1,13 @@
+<!-- app/views/adoption_requests/confirmation.html.erb -->
+
+<%= render "shared/navbar" %>
+
+<div class="container">
+  <div class="alert alert-success" role="alert">
+    Your adoption application for <%= @dog.dog_name %> has been successfully submitted to the admin for review.
+  </div>
+
+  <div>
+    <%= image_tag @dog.picture, class: "img-fluid", alt: @dog.dog_name %>
+  </div>
+</div>

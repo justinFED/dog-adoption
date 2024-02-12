@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   # Resourceful route for dogs
   resources :dogs, only: [:show]
 
+  get '/adoption_application_confirmation', to: 'adoption_requests#confirmation', as: 'adoption_application_confirmation'
+
+  post '/adoption_requests/:id/approve', to: 'adoption_requests#approve', as: 'approve_adoption_request'
+  post '/adoption_requests/:id/decline', to: 'adoption_requests#decline', as: 'decline_adoption_request'
+
   # User routes
   namespace :user do
     resources :dashboard, only: [:index] do

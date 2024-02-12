@@ -1,6 +1,5 @@
 <%= render "shared/navbar" %>
 
-
 <h1>Adoption Requests</h1>
 
 <table class="table">
@@ -12,21 +11,36 @@
       <th>Age</th>
       <th>Occupation</th>
       <th>Reason</th>
+      <th>Dog Name</th>
+      <th>Dog Breed</th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <% @adoption_requests.each do |request| %>
       <tr>
-        <td><%= request.user.first_name + ' ' + request.user.last_name %></td> <!-- Concatenating first name and last name -->
+        <td><%= request.user.first_name + ' ' + request.user.last_name %></td>
         <td><%= request.user.address %></td>
         <td><%= request.user.contact_details %></td>
         <td><%= request.user.date_of_birth %></td>
         <td><%= request.occupation %></td>
         <td><%= request.adoption_essay %></td>
+        <% if request.dog %>
+          <td><%= request.dog.dog_name %></td>
+          <td><%= request.dog.breed %></td>
+        <% else %>
+          <td>N/A</td>
+          <td>N/A</td>
+        <% end %>
         <td>
-          <%= button_to "Approve", approve_adoption_request_path(request), method: :post, class: "btn btn-success" %>
-          <%= button_to "Decline", decline_adoption_request_path(request), method: :post, class: "btn btn-danger" %>
+          <% if request.isApproved.nil? %>
+            <%= button_to "Approve", approve_adoption_request_path(request), method: :post, class: "btn btn-success" %>
+            <%= button_to "Decline", decline_adoption_request_path(request), method: :post, class: "btn btn-danger" %>
+          <% elsif request.isApproved %>
+            <span class="text-success">Approved</span>
+          <% else %>
+            <span class="text-danger">Declined</span>
+          <% end %>
         </td>
       </tr>
     <% end %>

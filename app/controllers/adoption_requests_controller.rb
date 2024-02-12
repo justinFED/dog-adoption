@@ -1,32 +1,51 @@
 class AdoptionRequestsController < ApplicationController 
- def index
+  def index
     @adoption_requests = AdoptionRequest.all
   end
 
   def new
     @adoption_request = AdoptionRequest.new
-    @dog = Dog.find(params[:dog_id]) # Assuming you are passing the dog_id parameter
-    render 'adoption_requests/new_request'
+    @dog = Dog.find(params[:dog_id])
   end
 
   def create
-    @adoption_request = AdoptionRequest.new(adoption_request_params)
-    @dog = Dog.find(params[:dog_id])
+    @adoption_request = current_user.adoption_requests.build(adoption_request_params)
+    @dog = Dog.find_by(id: @adoption_request.dog_id) # Find the dog by dog_id
 
     if @adoption_request.save
-    debugger
-
-      redirect_to adoption_requests_path, notice: 'Adoption request was successfully created.'
+      redirect_to adoption_application_confirmation_path(dog_id: @dog.id), notice: 'Adoption request was successfully submitted.'
     else
       render :new
     end
   end
 
+  def confirmation
+    @dog = Dog.find_by(id: params[:dog_id])
+  end
+
+  def approve
+    @adoption_request = AdoptionRequest.find(params[:id])
+    if @adoption_request.update(isApproved: true)
+      flash[:success] = "Adoption request approved successfully."
+    else
+      flash[:error] = "Failed to approve adoption request."
+    end
+    redirect_to adoption_requests_path
+  end
+
+  def decline
+    @adoption_request = AdoptionRequest.find(params[:id])
+    if @adoption_request.update(isApproved: false)
+      flash[:success] = "Adoption request declined successfully."
+    else
+      flash[:error] = "Failed to decline adoption request."
+    end
+    redirect_to adoption_requests_path
+  end
+
   private
 
   def adoption_request_params
-    debugger
-    params.require(:adoption_request).permit(:occupation, :adoption_essay).merge(user_id: current_user.id, dog_id: params[:dog_id])
+    params.require(:adoption_request).permit(:occupation, :adoption_essay, :dog_id)
   end
- 
 end

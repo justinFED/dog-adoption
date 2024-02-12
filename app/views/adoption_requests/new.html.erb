@@ -1,0 +1,40 @@
+<%= render "shared/navbar" %>
+
+<h1 class="mb-4 text-center">Create Adoption Request</h1>
+<div class="container">
+  <h1>You are about to adopt:</h1>
+  <h2><%= @dog.dog_name %></h2>
+  <%= image_tag @dog.picture, class: "card-img-top" %>
+  
+  <h2><strong>Breed:</strong> <%= @dog.breed %></h2>
+
+  <!-- Add the code to display validation errors here -->
+  <% if @adoption_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@adoption_request.errors.count, "error") %> prohibited this adoption request from being saved:</h2>
+
+      <ul>
+        <% @adoption_request.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= form_with(model: @adoption_request, url: adoption_requests_path, method: :post) do |form| %>
+    <%= form.hidden_field :dog_id, value: @dog.id %>
+
+    <!-- Add form fields here -->
+    <div class="form-group">
+      <%= form.label :occupation %>
+      <%= form.text_field :occupation, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :adoption_essay, "Why do you deserve to adopt #{@dog.dog_name}?" %>
+      <%= form.text_area :adoption_essay, class: "form-control", rows: 5 %>
+    </div>
+
+    <%= form.submit "Submit", class: "btn btn-primary" %>
+  <% end %>
+</div>

@@ -24,50 +24,67 @@
 <div class="dashboard-container">
   <h2 class="user-header">Welcome to Pawsome Pals Dog Adoption Center <%= "#{current_user.first_name} #{current_user.last_name}" %>!</h2>
 
-  <div class="row">
-    <div class="col-md-6">
-      <div class="why-adopt container-sm">
-        <div class="why-adopt-inner">
-          <h3>Why Should You Adopt?</h3>
-          <p>
-            There are several reasons why adopting dogs from shelters or rescue organizations is a commendable choice:
-            <ul>
-              <li>Save a Life</li>
-              <li>Combat Overpopulation</li>
-              <li>Support Rescue Organizations</li>
-              <li>Prevent Puppy Mills</li>
-              <li>Find Your Perfect Match</li>
-              <li>Health Benefits</li>
-              <li>Promote Responsible Pet Ownership</li>
-            </ul>
-          </p>
-        </div>
-      </div>
-      <!-- New container for the new section -->
-      <div class="new-container container-sm">
-        <h3>New Section Title</h3>
-        <p>New section content goes here.</p>
+ <div class="row">
+  <div class="col-md-6">
+    <div class="why-adopt container-sm">
+      <div class="why-adopt-inner">
+        <h3>Why Should You Adopt?</h3>
+        <p>
+          There are several reasons why adopting dogs from shelters or rescue organizations is a commendable choice:
+          <ul>
+            <li>Save a Life</li>
+            <li>Combat Overpopulation</li>
+            <li>Support Rescue Organizations</li>
+            <li>Prevent Puppy Mills</li>
+            <li>Find Your Perfect Match</li>
+            <li>Health Benefits</li>
+            <li>Promote Responsible Pet Ownership</li>
+          </ul>
+        </p>
       </div>
     </div>
 
-    <div class="col-md-6">
-      <div class="random-images container-sm">
-        <h3>They could be a part of your family. Rehome them now!</h3>
-        <h6>Following pals below are not for adoption**</h6>
+    <!-- New container for the future pet parent section -->
+    <div class="future-pet-parent-container container-sm">
+      <% if current_user.adopted_dog.nil? %>
+        <h3>Future Pet Parent</h3>
+        <p>You are not a pet parent yet. Consider adopting a furry friend today!</p>
+      <% elsif current_user.pending_adoption? %>
+        <h3>Adoption Pending</h3>
+        <p>Your adoption request is pending review.</p>
+      <% elsif current_user.approved_adoption? %>
+        <h3>Proud Pet Parent</h3>
+        <p>Congratulations! You are now a proud pet parent of <%= current_user.adopted_dog.dog_name %>!</p>
         <div class="row">
-          <% dog_api = DogApi.new %>
-          <% images_response = dog_api.fetch_random_images %>
-          <% if images_response.code == 200 %>
-            <% images = JSON.parse(images_response.body) %>
-            <% images.take(9).each do |image| %>
-              <div class="col-md-4 mb-4">
-                <img src="<%= image['url'] %>" alt="Dog Image" class="img-fluid" style="max-width: 250px; max-height: 200px;">
-              </div>
-            <% end %>
-          <% else %>
-            <p>Failed to fetch images from Dog API</p>
-          <% end %>
+          <div class="col-md-6">
+            <p><%= image_tag current_user.adopted_dog.picture, class: "img-fluid", alt: current_user.adopted_dog.dog_name %></p>
+          </div>
+          <div class="col-md-6">
+            <p>Breed: <%= current_user.adopted_dog.breed %></p>
+            <!-- Add more details about the dog if needed -->
+          </div>
         </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="random-images container-sm">
+      <h3>They could be a part of your family. Rehome them now!</h3>
+      <h6>Following pals below are not for adoption**</h6>
+      <div class="row">
+        <% dog_api = DogApi.new %>
+        <% images_response = dog_api.fetch_random_images %>
+        <% if images_response.code == 200 %>
+          <% images = JSON.parse(images_response.body) %>
+          <% images.take(9).each do |image| %>
+            <div class="col-md-4 mb-4">
+              <img src="<%= image['url'] %>" alt="Dog Image" class="img-fluid" style="max-width: 250px; max-height: 200px;">
+            </div>
+          <% end %>
+        <% else %>
+          <p>Failed to fetch images from Dog API</p>
+        <% end %>
       </div>
     </div>
   </div>
