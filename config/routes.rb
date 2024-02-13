@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # Devise routes for user authentication
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
 
   resources :dogs, only: [:index, :new, :create, :edit, :update, :destroy]
 
