@@ -157,4 +157,49 @@
     border-radius: 20px;
 }
 
+/* Contact Us Section */
+.contact-section {
+    padding: 40px;
+    border-top: 1px solid black;
+}
 
+.contact-container {
+    
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.contact-content {
+    text-align: center;
+    color: #0e0101;
+    margin-right: 20px;
+     /* Adjust spacing between content and contact info */
+}
+
+.contact-content h2 {
+    margin-bottom: 20px;
+    color: black;
+}
+
+.contact-content p {
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    text-align: center;
+    color: #110101;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+}
+
+.contact-info a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
