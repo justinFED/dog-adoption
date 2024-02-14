@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AdoptionRequest, type: :model do
+
   # Associations test
   describe 'associations' do
     it { should belong_to(:user) }
@@ -28,25 +29,23 @@ RSpec.describe AdoptionRequest, type: :model do
     end
   end
 
-  describe '#approved_adoption?' do
-    let(:dog) { build_stubbed(:dog) }
+  describe '#pending?' do
+    let(:user) { create(:user) }
+    let(:dog) { create(:dog) }
+    context 'when the adoption request is not approved' do
+      let(:adoption_request) { create(:adoption_request, user: user, dog: dog, isApproved: false) }
 
-    context 'when dog is nil' do
-      subject { build_stubbed(:adoption_request, dog: nil) }
-      it { is_expected.not_to be_approved_adoption }
+      it 'is pending' do
+        expect(adoption_request.pending?).to eq(true)
+      end
     end
 
-    context 'when dog is not approved' do
-      before { allow(dog).to receive(:is_approved).and_return(false) }
-      subject { build_stubbed(:adoption_request, dog: dog) }
-      it { is_expected.not_to be_approved_adoption }
-    end
+    context 'when the adoption request is approved' do
+      let(:adoption_request) { create(:adoption_request, user: user, dog: dog, isApproved: true) }
 
-    context 'when dog exists and is approved' do
-      before { allow(dog).to receive(:is_approved).and_return(true) }
-      subject { build_stubbed(:adoption_request, dog: dog) }
-      it { is_expected.to be_approved_adoption }
+      it 'is not pending' do
+        expect(adoption_request.pending?).to eq(false)
+      end
     end
   end
-
 end
