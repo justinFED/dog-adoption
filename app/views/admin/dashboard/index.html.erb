@@ -18,13 +18,19 @@
     </div>
 
     <div class="col-md-4">
-      <div class="card admin-card">
-        <div class="card-body admin-card-body">
-          <h5 class="card-title admin-card-title">Adoption Requests</h5>
-          <p class="card-text admin-card-text">There are 0 pending adoption requests waiting for review.</p>
-        </div>
+    <div class="card admin-card">
+      <div class="card-body admin-card-body">
+        <h5 class="card-title admin-card-title">Adoption Requests</h5>
+        <p class="card-text admin-card-text">
+          <% pending_requests_count = AdoptionRequest.where(isApproved: nil).count %>
+          There <%= pending_requests_count == 1 ? "is" : "are" %> <%= pending_requests_count %> <%= "pending adoption request".pluralize(pending_requests_count) %> waiting for review.
+        </p>
       </div>
     </div>
+  </div>
+  
+  
+  
 
     <div class="col-md-4">
       <div class="card admin-card">
