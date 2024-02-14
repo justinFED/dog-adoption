@@ -86,3 +86,8 @@
     background-color: #138496;
     border-color: #138496;
   }
+
+  .highlight-number {
+    color: #007bff; 
+    font-weight: bold;
+  }

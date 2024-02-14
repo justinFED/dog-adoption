@@ -8,39 +8,39 @@
   <p class="admin-par">Manage and monitor the dog adoption activities at Pawsome Pals.</p>
 
   <div class="row mt-4">
-    <div class="col-md-4">
-      <div class="card admin-card">
-        <div class="card-body admin-card-body">
-          <h5 class="card-title admin-card-title">Total Dogs for Adoption</h5>
-          <p class="card-text admin-card-text">Currently, there are 42 dogs available for adoption.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
+  <div class="col-md-4 ">
     <div class="card admin-card">
       <div class="card-body admin-card-body">
-        <h5 class="card-title admin-card-title">Adoption Requests</h5>
+        <h5 class="card-title admin-card-title">Total Dogs for Adoption</h5>
         <p class="card-text admin-card-text">
-          <% pending_requests_count = AdoptionRequest.where(isApproved: nil).count %>
-          There <%= pending_requests_count == 1 ? "is" : "are" %> <%= pending_requests_count %> <%= "pending adoption request".pluralize(pending_requests_count) %> waiting for review.
+          <% available_dogs_count = Dog.where(isActive: true).count %>
+          Currently, there <%= available_dogs_count == 1 ? "is" : "are" %> <span class="highlight-number"><%= available_dogs_count %></span> <%= "dog".pluralize(available_dogs_count) %> available for adoption.
         </p>
       </div>
     </div>
   </div>
-  
-  
-  
 
-    <div class="col-md-4">
-      <div class="card admin-card">
-        <div class="card-body admin-card-body">
-          <h5 class="card-title admin-card-title">Successful Adoptions</h5>
-          <p class="card-text admin-card-text">Congratulations! 30 dogs found their forever homes this month.</p>
-        </div>
-      </div>
+  <div class="col-md-4 ">
+  <div class="card admin-card">
+    <div class="card-body admin-card-body">
+      <h5 class="card-title admin-card-title">Adoption Requests</h5>
+      <p class="card-text admin-card-text">
+        <% pending_requests_count = AdoptionRequest.where(isApproved: nil).count %>
+        There <%= pending_requests_count == 1 ? "is" : "are" %> <span class="highlight-number"><%= pending_requests_count %></span> <%= "pending adoption request".pluralize(pending_requests_count) %> waiting for review.
+      </p>
     </div>
   </div>
+</div>
+  
+<div class="col-md-4 ">
+<div class="card admin-card">
+  <div class="card-body admin-card-body">
+    <h5 class="card-title admin-card-title">Successful Adoptions</h5>
+    <p class="card-text admin-card-text">Congratulations! <span class="highlight-number">10</span> dogs found their forever homes this month.</p>
+  </div>
+</div>
+</div>
+</div>
 
  
 
