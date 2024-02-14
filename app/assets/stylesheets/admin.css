@@ -91,3 +91,32 @@
     color: #007bff; 
     font-weight: bold;
   }
+
+  /* All Users */
+  .show-container {
+    margin: 20px 30px; /* Adjust the top margin as needed */
+  }
+  
+  .show-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .show-container table {
+    width: 100%;
+  }
+  
+  .show-container th,
+  .show-container td {
+    padding: 8px;
+  }
+  
+  .show-container thead {
+    background-color: var(--neutral-color); /* Dark background color for the header row */
+    color: #fff; /* Text color for header row */
+  }
+  
+  .show-container tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternate row background color */
+  }
+  

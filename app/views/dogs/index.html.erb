@@ -8,8 +8,10 @@
 			<h3>Search by Breed</h3>
 			<input type="search" id="breedSearch" name="breedSearch" class="form-control mb-3" placeholder="Enter breed here" aria-label="Search dogs by breed">
 			<p>Explore our database of dogs ready for adoption. Use the search box above to filter by breed.</p>
+			
 			<%= link_to 'Add New Dog', new_dog_path, class: 'btn btn-success mb-3' %>
 			<table class="table">
+			
         <thead>
 					<tr>
 							<th>Name</th>
@@ -46,5 +48,6 @@
 				</tbody>
     </table>
 	</div>
+	<%= link_to "Back to Admin Dashboard", admin_dashboard_path, class: "btn btn-secondary" %>
 </main>
 
