@@ -10,7 +10,6 @@
   
   <h2><strong>Breed:</strong> <%= @dog.breed %></h2>
 
-  <!-- Add the code to display validation errors here -->
   <% if @adoption_request.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@adoption_request.errors.count, "error") %> prohibited this adoption request from being saved:</h2>

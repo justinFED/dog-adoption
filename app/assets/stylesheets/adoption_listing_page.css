@@ -125,3 +125,41 @@
     margin-top: 0px;
   }
   
+
+  /* Adoption Request */
+
+  .adoption-request-container {
+    margin-top: 20px;
+    padding: 20px;
+    
+    border-radius: 5px; /* Add some border radius for rounded corners */
+  }
+  
+  .adoption-request-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .adoption-request-container table {
+    width: 100%;
+  }
+  
+  .adoption-request-container th,
+  .adoption-request-container td {
+    padding: 8px;
+  }
+  
+  .adoption-request-container thead {
+    background-color: #343a40;
+    color: #fff;
+  }
+  
+  .adoption-request-container tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .adoption-request-container button {
+    margin-right: 5px; /* Add some space between buttons */
+  }
+  
