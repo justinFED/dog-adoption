@@ -33,8 +33,6 @@
       <div id="dog-temperament"></div>
     </div>
 
-
-
     <div class="mb-3">
       <%= form.label :age, class: 'form-label' %>
       <%= form.number_field :age, id: :dog_age, class: 'form-control' %>
@@ -62,7 +60,9 @@
 
         <div class="actions">
           <%= form.submit class: 'btn btn-primary' %>
+          
         </div>
+        <%= link_to "Back to Admin Dashboard", admin_dashboard_path, class: "btn btn-secondary" %>
       <% end %>
 
 
