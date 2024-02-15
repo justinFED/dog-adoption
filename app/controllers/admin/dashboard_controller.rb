@@ -4,5 +4,9 @@ class Admin::DashboardController < ApplicationController
     def index
       @users = User.all
     end
+
+     def show
+    @users = User.where.not(role: 'admin')
+  end
   end
   

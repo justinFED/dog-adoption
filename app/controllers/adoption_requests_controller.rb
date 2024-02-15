@@ -1,4 +1,6 @@
 class AdoptionRequestsController < ApplicationController 
+  before_action :set_pending_request_count, only: [:index, :new, :create, :confirmation, :approve, :decline]
+
   def index
     @adoption_requests = AdoptionRequest.all
   end
@@ -47,5 +49,9 @@ class AdoptionRequestsController < ApplicationController
 
   def adoption_request_params
     params.require(:adoption_request).permit(:occupation, :adoption_essay, :dog_id)
+  end
+
+  def set_pending_request_count
+    @pending_request_count = AdoptionRequest.where(isApproved: nil).count
   end
 end

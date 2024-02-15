@@ -7,7 +7,7 @@
       <% if @dog.picture.attached? %>
         <%= image_tag @dog.picture, class: "card-img-top" %>
       <% else %>
-        <p>No picture available.</p>
+        <p class="no-picture">No picture available.</p>
       <% end %>
       <div class="card-body">
         <h2 class="card-title"><%= @dog.dog_name %></h2>
@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="col-md-6 mb-4">
-    <div class="card shadow-sm p3 mt-2">
+    <div class="card shadow-sm p-3 mt-2">
       <div class="card-body">
         <h3 class="card-title">Description</h3>
         <p class="card-text"><%= @dog.description %></p>
@@ -28,4 +28,3 @@
     <%= link_to "Back to Listings", dogs_path, class: "btn btn-primary mt-2", role: "button" %>
   </div>
 </div>
-
