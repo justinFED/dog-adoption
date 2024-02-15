@@ -112,7 +112,7 @@
   }
   
   .show-container thead {
-    background-color: var(--neutral-color); /* Dark background color for the header row */
+    background-color: #343a40; /* Dark background color for the header row */
     color: #fff; /* Text color for header row */
   }
   
