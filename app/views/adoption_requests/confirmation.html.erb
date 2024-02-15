@@ -8,6 +8,8 @@
   </div>
 
   <div>
-    <%= image_tag @dog.picture, class: "img-fluid", alt: @dog.dog_name %>
+    <% if @dog&.picture.present? %>
+      <%= image_tag @dog.picture, class: "img-fluid", alt: @dog.dog_name %>
+    <% end %>
   </div>
 </div>
