@@ -1,51 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-light">
-  <div class="nav-container">
-    <a class="navbar-brand" href="#">Pawsome Pals</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a href="<%= user_dashboard_index_path %>" class="btn btn-landing btn-lg">Home</a>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Listings", listings_user_dashboard_index_path, class: "btn btn-landing btn-lg" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Settings", edit_user_registration_path, class: "btn btn-landing btn-lg" %>
-        </li>
-      </ul>
-      <%= link_to 'Sign Out', destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn btn-landing btn-lg' %>
-    </div>
-  </div>
-</nav>
+<%= render "shared/navbar" %>
 
 <div class="dashboard-container">
   <h2 class="user-header">Welcome to Pawsome Pals Dog Adoption Center <%= "#{current_user.first_name} #{current_user.last_name}" %>!</h2>
 
- <div class="row">
-  <div class="col-md-6">
-    <div class="why-adopt container-sm">
-      <div class="why-adopt-inner">
-        <h3>Why Should You Adopt?</h3>
-        <p>
-          There are several reasons why adopting dogs from shelters or rescue organizations is a commendable choice:
-          <ul>
-            <li>Save a Life</li>
-            <li>Combat Overpopulation</li>
-            <li>Support Rescue Organizations</li>
-            <li>Prevent Puppy Mills</li>
-            <li>Find Your Perfect Match</li>
-            <li>Health Benefits</li>
-            <li>Promote Responsible Pet Ownership</li>
-          </ul>
-        </p>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="why-adopt">
+        <div class="why-adopt-inner">
+          <h3>Why Should You Adopt?</h3>
+          <p>
+            There are several reasons why adopting dogs from shelters or rescue organizations is a commendable choice:
+            <ul>
+              <li>Save a Life</li>
+              <li>Combat Overpopulation</li>
+              <li>Support Rescue Organizations</li>
+              <li>Prevent Puppy Mills</li>
+              <li>Find Your Perfect Match</li>
+              <li>Health Benefits</li>
+              <li>Promote Responsible Pet Ownership</li>
+            </ul>
+          </p>
+        </div>
       </div>
-    </div>
 
-    <!-- New container for the future pet parent section -->
-    <div class="future-pet-parent-container container-sm">
+      <div class="future-pet-parent-container">
       <% if current_user.adopted_dog.nil? %>
         <h3>Future Pet Parent</h3>
         <p>You are not a pet parent yet. Consider adopting a furry friend today!</p>
@@ -55,21 +33,24 @@
       <% elsif current_user.approved_adoption? %>
         <h3>Proud Pet Parent</h3>
         <p>Congratulations! You are now a proud pet parent of <%= current_user.adopted_dog.dog_name %>!</p>
-        <div class="row">
-          <div class="col-md-6">
-            <p><%= image_tag current_user.adopted_dog.picture, class: "img-fluid", alt: current_user.adopted_dog.dog_name %></p>
-          </div>
-          <div class="col-md-6">
+        <div class="image-row">
+          <div class="breed-info">
             <p>Breed: <%= current_user.adopted_dog.breed %></p>
             <!-- Add more details about the dog if needed -->
+            <%= image_tag current_user.adopted_dog.picture, class: "img-fluid", alt: current_user.adopted_dog.dog_name %>
+          </div>
+          <div class="image-container">
+            
           </div>
         </div>
       <% end %>
     </div>
-  </div>
+    
+    
+    </div>
 
-  <div class="col-md-6">
-    <div class="random-images container-sm">
+    <div class="col-md-6">
+    <div class="random-images">
       <h3>They could be a part of your family. Rehome them now!</h3>
       <h6>Following pals below are not for adoption**</h6>
       <div class="row">
@@ -79,7 +60,9 @@
           <% images = JSON.parse(images_response.body) %>
           <% images.take(9).each do |image| %>
             <div class="col-md-4 mb-4">
-              <img src="<%= image['url'] %>" alt="Dog Image" class="img-fluid" style="max-width: 250px; max-height: 200px;">
+              <div class="dog-image">
+                <img src="<%= image['url'] %>" alt="Dog Image" class="img-fluid">
+              </div>
             </div>
           <% end %>
         <% else %>
@@ -88,4 +71,8 @@
       </div>
     </div>
   </div>
+  
+  </div>
+
+ 
 </div>
