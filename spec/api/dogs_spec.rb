@@ -13,7 +13,7 @@ RSpec.describe DogApi do
       api.list_breeds
 
       expect(WebMock).to have_requested(:get, "https://api.thedogapi.com/v1/breeds")
-                         .with(headers: {'x-api-key' => ENV['DOG_API_KEY']})
+      .with(headers: {'x-api-key' => ENV['DOG_API_KEY']})
     end
   end
 

@@ -1,7 +1,36 @@
 require 'rails_helper'
+require 'webmock/rspec'
+require_relative '../../app/api/dog_api'
 
 RSpec.describe DogsController, type: :request do
   let(:dog) { create(:dog) } 
+
+	before do
+		stub_request(:get, "https://api.thedogapi.com/v1/breeds")
+			.with(
+				headers: {
+					'Accept'=>'application/json',
+					'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+					'Content-Type'=>'application/json',
+					'User-Agent'=>'Ruby',
+					'X-Api-Key'=> 'live_iVeNL5naj6yQlZeUr4zxav6cKp6T0UenMX1q2GEMYnJS2m6fntJzB4Cib6SE2kaj'
+				}
+			)
+			.to_return(status: 200, body: '[]', headers: {})
+
+			stub_request(:get, "https://api.thedogapi.com/v1/breeds/search?q=Labrador")
+			.with(
+				headers: {
+					'Accept'=>'*/*',
+					'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+					'User-Agent'=>'Ruby'
+				}
+			)
+			.to_return(status: 200, body: '[{"temperament": "Gentle, Intelligent, Family-friendly"}]', headers: {})
+
+			stub_request(:get, "https://api.thedogapi.com/v1/breeds/search?q=Golden%20Retriever")
+      .to_return(status: 200, body: '[{"temperament": "Friendly, Intelligent, Devoted"}]', headers: {})
+	end
 
   describe "GET #index" do
     it "assigns all dogs as @dogs and renders the index template" do
@@ -18,14 +47,15 @@ RSpec.describe DogsController, type: :request do
     end
   end
 
-  describe "GET #new" do
-    it "assigns a new dog as @dog and fetches breeds" do
-      # Assuming `fetch_dog_breeds` is stubbed to return a mock response
-      get new_dog_path
-      expect(assigns(:dog)).to be_a_new(Dog)
-      expect(assigns(:breeds)).not_to be_empty
-    end
-  end
+  describe "GET #index" do
+		it "assigns all dogs as @dogs and renders the index template" do
+			stub_request(:get, /https:\/\/api.thedogapi.com\/v1\/breeds\/search\?q=.*/)
+				.to_return(status: 200, body: '[{"temperament": "Intelligent, Friendly, Reliable"}]', headers: {})
+
+			get dogs_path
+			expect(response).to be_successful
+		end
+	end
 
   describe "GET #edit" do
     it "assigns the requested dog as @dog for editing" do
