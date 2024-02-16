@@ -4,7 +4,9 @@
 <div class="container">
   <h1>You are about to adopt:</h1>
   <h2><%= @dog.dog_name %></h2>
-  <%= image_tag @dog.picture, class: "card-img-top" %>
+  <% if @dog&.picture.present? %>
+    <%= image_tag @dog.picture, class: "card-img-top" %>
+  <% end %>
   
   <h2><strong>Breed:</strong> <%= @dog.breed %></h2>
 
