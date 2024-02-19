@@ -124,6 +124,8 @@
   .card-body{
     margin-top: 0px;
   }
+
+  
   
 
   /* Adoption Request */
@@ -163,3 +165,97 @@
     margin-right: 5px; /* Add some space between buttons */
   }
   
+
+  /* Add new dog */
+
+
+  .add-card-body {
+    
+    padding: 1.25rem;
+
+}
+
+
+/* Styles for the container holding the new dog form */
+.new-dog-container {
+  max-width: 600px; /* Adjust as needed */
+  margin: 0 auto; /* Center the container */
+  padding: 20px;
+}
+
+/* Styles for the card containing the new dog form */
+.add-card {
+  border: 1px solid #ccc; /* Border around the card */
+  border-radius: 5px; /* Rounded corners */
+  padding: 20px; /* Padding inside the card */
+  background-color: var(--secondary-color);
+}
+
+/* Styles for the card header */
+.card-header {
+  background-color: #007bff; /* Blue background color */
+  color: #fff; /* White text color */
+  padding: 10px 20px; /* Padding inside the header */
+  border-top-left-radius: 5px; /* Rounded corners for the top-left */
+  border-top-right-radius: 5px; /* Rounded corners for the top-right */
+}
+
+/* Styles for the form inside the card body */
+.add-card-body {
+  margin-top: 20px; /* Add some space between the header and the form */
+}
+
+/* Styles for form labels */
+.form-label {
+  font-weight: bold; /* Bold text for labels */
+}
+
+/* Styles for form inputs */
+.form-control {
+  width: 100%; /* Full width for form inputs */
+  padding: 8px; /* Padding inside the inputs */
+  margin-bottom: 10px; /* Add some space between inputs */
+  border: 1px solid #ccc; /* Border around inputs */
+  border-radius: 4px; /* Rounded corners */
+}
+
+/* Styles for form buttons */
+.btn {
+  padding: 8px 20px; /* Padding inside the buttons */
+  margin-right: 10px; /* Add some space between buttons */
+  border-radius: 4px; /* Rounded corners */
+}
+
+/* Primary button style */
+.btn-primary {
+  background-color: #007bff; /* Blue background color */
+  color: #fff; /* White text color */
+  border: none; /* No border */
+}
+
+/* Secondary button style */
+.btn-secondary {
+  background-color: #6c757d; /* Gray background color */
+  color: #fff; /* White text color */
+  border: none; /* No border */
+}
+
+/* Error message style */
+.alert-danger {
+  color: #721c24; /* Dark red text color */
+  background-color: #f8d7da; /* Light red background color */
+  border-color: #f5c6cb; /* Red border color */
+  padding: 10px; /* Padding inside the alert */
+  border-radius: 4px; /* Rounded corners */
+  margin-bottom: 20px; /* Add some space below the alert */
+}
+
+/* Style for the list inside the error message */
+.alert-danger ul {
+  margin-bottom: 0; /* Remove default margin */
+}
+
+/* Style for list items inside the error message */
+.alert-danger li {
+  margin-bottom: 5px; /* Add some space between list items */
+}
