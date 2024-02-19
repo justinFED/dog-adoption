@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   # Resources for managing adoption requests
   resources :adoption_requests, only: [:index, :new, :create]
+
   # Custom routes for dog-related API endpoints
   get 'dogs/breeds', to: 'dogs#breeds', as: 'breeds'
   get 'dogs/image/:image_id', to: 'dogs#image_details', as: 'image_details'
@@ -22,7 +23,6 @@ Rails.application.routes.draw do
   resources :dogs, only: [:show]
 
   get '/adoption_application_confirmation', to: 'adoption_requests#confirmation', as: 'adoption_application_confirmation'
-
   post '/adoption_requests/:id/approve', to: 'adoption_requests#approve', as: 'approve_adoption_request'
   post '/adoption_requests/:id/decline', to: 'adoption_requests#decline', as: 'decline_adoption_request'
 

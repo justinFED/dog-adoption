@@ -70,6 +70,7 @@ class DogsController < ApplicationController
   private
 
   def fetch_breed_details(breed_name)
+    return [] if breed_name.blank?
     response = HTTParty.get("https://api.thedogapi.com/v1/breeds/search?q=#{breed_name}")
     response.parsed_response if response.success? && response.present?
   end
