@@ -74,8 +74,8 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 5.0'
-  gem 'httparty', '~> 0.19'
   gem 'webmock'
 end
 
+gem 'httparty', '~> 0.19'
 gem 'dotenv-rails'
