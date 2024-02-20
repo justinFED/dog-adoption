@@ -20,7 +20,7 @@ test:
 
 production:
   <<: *default
-  database: pawsomepals_adoption_production_1un4
+  database: pawsomepals_adoption_production_5v2c
   username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['DATABASE_HOST'] %>
