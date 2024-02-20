@@ -32,7 +32,7 @@
         <p>Your adoption request is pending review.</p>
       <% elsif current_user.approved_adoption? %>
         <h3>Proud Pet Parent</h3>
-        <p>Congratulations! You are now a proud pet parent of <%= current_user.adopted_dog.dog_name %>!</p>
+        <p>Congratulations! You are now a proud pet parent of <h3 class="adopted-dog-name"><%= current_user.adopted_dog.dog_name %></h3></p>
         <div class="image-row">
           <div class="breed-info">
             <p>Breed: <%= current_user.adopted_dog.breed %></p>

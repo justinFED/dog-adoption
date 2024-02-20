@@ -65,11 +65,14 @@
 
   /* Future Pet Parent Container */
   .future-pet-parent-container {
-    text-align: left;
+    position: relative;
+    align-items: center;
+    justify-content: center;
     background-color: var(--neutral-color);
     border-radius: 20px;
     padding: 20px;
     margin-top: 20px;
+    width: 900px;
   }
   
   .future-pet-parent-container h3 {
@@ -83,31 +86,41 @@
     font-weight: 500;
     margin-bottom: 20px;
     text-align: center;
+    font-weight: 500px;
   }
   
   .future-pet-parent-container img {
     max-width: 100%;
     height: auto;
-    width: 150px;
+    width: 450px;
+  }
+
+  .adopted-dog-name{
+    font-weight: 1000;
+    font-size: 2rem;
   }
 
   .image-row {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
   }
   
   .breed-info,
   .image-container {
-   justify-content: center;
-   text-align: center;
-    padding: 20px; /* Add padding for spacing */
+    position: relative;
+    text-align: center;
+    padding-bottom: 20px; /* Add padding for spacing */
+    padding-top: 20px;
   }
   
   .image-container {
-    text-align: center; /* Center the image */
+
   }
   
   .breed-info {
+    width: 700px;
     background-color: var(--secondary-color); /* Add background color */
     border-radius: 10px; /* Add border radius */
   }
